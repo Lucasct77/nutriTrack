@@ -1,0 +1,274 @@
+[
+  {
+    "nombre": "pollo",
+    "peso": 100,
+    "calorias": 108,
+    "grasas": 12.2,
+    "proteinas": 22,
+    "hidratos": 0.5
+  },
+  {
+    "nombre": "carne picada",
+    "peso": 100,
+    "calorias": 175,
+    "grasas": 12,
+    "proteinas": 16,
+    "hidratos": 1.2
+  },
+  {
+    "nombre": "cerdo",
+    "peso": 100,
+    "calorias": 152,
+    "grasas": 8.9,
+    "proteinas": 18,
+    "hidratos": 0
+  },
+  {
+    "nombre": "huevos",
+    "peso": 1,
+    "calorias": 77,
+    "grasas": 5.8,
+    "proteinas": 6.2,
+    "hidratos": 0.56
+  },
+  {
+    "nombre": "claras de huevo",
+    "peso": 1,
+    "calorias": 17,
+    "grasas": 0,
+    "proteinas": 4,
+    "hidratos": 0
+  },
+  {
+    "nombre": "pavo",
+    "peso": 100,
+    "calorias": 109,
+    "grasas": 1.2,
+    "proteinas": 24.5,
+    "hidratos": 0
+  },
+  {
+    "nombre": "pescado",
+    "peso": 100,
+    "calorias": 82,
+    "grasas": 1.2,
+    "proteinas": 18,
+    "hidratos": 0.5
+  },
+  {
+    "nombre": "proteina vegana",
+    "peso": 100,
+    "calorias": 197,
+    "grasas": 5.8,
+    "proteinas": 16.8,
+    "hidratos": 17.4
+  },
+  {
+    "nombre": "protes",
+    "peso": 1,
+    "calorias": 109,
+    "grasas": 1.1,
+    "proteinas": 23,
+    "hidratos": 1.9
+  },
+  {
+    "nombre": "jamon serrano",
+    "peso": 100,
+    "calorias": 248,
+    "grasas": 12.2,
+    "proteinas": 33.5,
+    "hidratos": 1
+  },
+  {
+    "nombre": "jamon york",
+    "peso": 100,
+    "calorias": 99,
+    "grasas": 2.3,
+    "proteinas": 18,
+    "hidratos": 1.5
+  },
+  {
+    "nombre": "atún (latas escabeche)",
+    "peso": 100,
+    "calorias": 116,
+    "grasas": 3.2,
+    "proteinas": 21,
+    "hidratos": 0.8
+  },
+  {
+    "nombre": "calamares",
+    "peso": 100,
+    "calorias": 57,
+    "grasas": 0.5,
+    "proteinas": 12,
+    "hidratos": 1
+  },
+  {
+    "nombre": "patatas cocidas",
+    "peso": 100,
+    "calorias": 59,
+    "grasas": 0.1,
+    "proteinas": 1.1,
+    "hidratos": 12.1
+  },
+  {
+    "nombre": "arroz cocido",
+    "peso": 100,
+    "calorias": 130,
+    "grasas": 0.2,
+    "proteinas": 2.4,
+    "hidratos": 28.6
+  },
+  {
+    "nombre": "couscous cocido",
+    "peso": 100,
+    "calorias": 112,
+    "grasas": 0.16,
+    "proteinas": 3.7,
+    "hidratos": 23.2
+  },
+  {
+    "nombre": "pasta cruda",
+    "peso": 100,
+    "calorias": 361,
+    "grasas": 1.5,
+    "proteinas": 13,
+    "hidratos": 72
+  },
+  {
+    "nombre": "pasta cocida",
+    "peso": 100,
+    "calorias": 124,
+    "grasas": 0.5,
+    "proteinas": 5.3,
+    "hidratos": 26.5
+  },
+  {
+    "nombre": "pan bimbo",
+    "peso": 100,
+    "calorias": 260,
+    "grasas": 2,
+    "proteinas": 8,
+    "hidratos": 52
+  },
+  {
+    "nombre": "avena",
+    "peso": 100,
+    "calorias": 376,
+    "grasas": 6.5,
+    "proteinas": 11.8,
+    "hidratos": 62.1
+  },
+  {
+    "nombre": "garbanzos",
+    "peso": 100,
+    "calorias": 90,
+    "grasas": 2.2,
+    "proteinas": 5.5,
+    "hidratos": 9.5
+  },
+  {
+    "nombre": "judias blancas",
+    "peso": 100,
+    "calorias": 83,
+    "grasas": 0.4,
+    "proteinas": 5.8,
+    "hidratos": 10.7
+  },
+  {
+    "nombre": "lentejas cocidas",
+    "peso": 100,
+    "calorias": 89,
+    "grasas": 0.4,
+    "proteinas": 8.2,
+    "hidratos": 10.7
+  },
+  {
+    "nombre": "lenteja naranja cruda",
+    "peso": 100,
+    "calorias": 337,
+    "grasas": 5.9,
+    "proteinas": 19,
+    "hidratos": 44
+  },
+  {
+    "nombre": "platano",
+    "peso": 1,
+    "calorias": 105,
+    "grasas": 0.4,
+    "proteinas": 1.3,
+    "hidratos": 26.4
+  },
+  {
+    "nombre": "melón",
+    "peso": 100,
+    "calorias": 34,
+    "grasas": 0.2,
+    "proteinas": 0.8,
+    "hidratos": 8.2
+  },
+  {
+    "nombre": "frutos del bosque",
+    "peso": 100,
+    "calorias": 75,
+    "grasas": 1,
+    "proteinas": 1.8,
+    "hidratos": 14.8
+  },
+  {
+    "nombre": "mantequilla de cacahuete",
+    "peso": 100,
+    "calorias": 665,
+    "grasas": 52.5,
+    "proteinas": 28,
+    "hidratos": 15.3
+  },
+  {
+    "nombre": "yogur protes",
+    "peso": 1,
+    "calorias": 64,
+    "grasas": 0,
+    "proteinas": 10,
+    "hidratos": 6
+  },
+  {
+    "nombre": "yogur 00",
+    "peso": 1,
+    "calorias": 45,
+    "grasas": 0,
+    "proteinas": 5.4,
+    "hidratos": 5.6
+  },
+  {
+    "nombre": "quesito",
+    "peso": 1,
+    "calorias": 43,
+    "grasas": 0,
+    "proteinas": 7.7,
+    "hidratos": 2.8
+  },
+  {
+    "nombre": "queso fresco",
+    "peso": 100,
+    "calorias": 52,
+    "grasas": 0.5,
+    "proteinas": 8.5,
+    "hidratos": 4.6
+  },
+  {
+    "nombre": "verduras varias",
+    "peso": 100,
+    "calorias": 38.75,
+    "grasas": 0.225,
+    "proteinas": 2.2,
+    "hidratos": 5.55
+  },
+  {
+    "nombre": "aceite",
+    "peso": 100,
+    "calorias": 820,
+    "grasas": 91,
+    "proteinas": 0,
+    "hidratos": 0
+  }
+]
