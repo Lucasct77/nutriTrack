@@ -523,6 +523,91 @@
 
         .summary-table {
             margin-top: 20px;
+            width: 100%;
+        }
+
+        /* Cards para móvil en lugar de tabla */
+        .detalle-card {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 10px;
+            border-left: 4px solid #667eea;
+        }
+
+        .detalle-card.ejercicio {
+            background: #fff5f5;
+            border-left-color: #ff6b6b;
+        }
+
+        .detalle-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .detalle-card-title {
+            font-weight: bold;
+            color: #667eea;
+            font-size: 1.05em;
+        }
+
+        .detalle-card.ejercicio .detalle-card-title {
+            color: #ff6b6b;
+        }
+
+        .detalle-card-momento {
+            background: #667eea;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.8em;
+        }
+
+        .detalle-card.ejercicio .detalle-card-momento {
+            background: #ff6b6b;
+        }
+
+        .detalle-card-info {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+            margin-top: 8px;
+            font-size: 0.9em;
+        }
+
+        .detalle-card-info-item {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .detalle-card-info-label {
+            color: #666;
+        }
+
+        .detalle-card-info-value {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .detalle-card-actions {
+            margin-top: 10px;
+            text-align: right;
+        }
+
+        /* Ocultar tabla en móvil, mostrar cards */
+        @media (max-width: 767px) {
+            .summary-table {
+                display: none;
+            }
+        }
+
+        /* Ocultar cards en desktop, mostrar tabla */
+        @media (min-width: 768px) {
+            .detalle-cards {
+                display: none;
+            }
         }
 
         .date-header {
@@ -546,6 +631,65 @@
 
         .offline-indicator.show {
             display: block;
+        }
+
+        /* Modal para gestión de localStorage */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            overflow: auto;
+        }
+
+        .modal-content {
+            background: white;
+            margin: 5% auto;
+            padding: 20px;
+            border-radius: 12px;
+            max-width: 90%;
+            max-height: 80%;
+            overflow: auto;
+        }
+
+        @media (min-width: 768px) {
+            .modal-content {
+                max-width: 600px;
+            }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #667eea;
+        }
+
+        .modal-close {
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            color: #999;
+        }
+
+        .modal-close:hover {
+            color: #333;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 200px;
+            padding: 10px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 0.9em;
         }
     </style>
 </head>
@@ -736,6 +880,7 @@
                     <div class="action-buttons">
                         <button class="btn btn-success" onclick="exportarHistorico()">📥 Exportar Histórico</button>
                         <button class="btn btn-primary" onclick="importarHistorico()">📤 Importar Histórico</button>
+                        <button class="btn btn-warning" onclick="abrirGestionDatos()">🔧 Gestionar Datos</button>
                     </div>
                 </div>
 
@@ -749,6 +894,33 @@
                 <div class="card">
                     <h3>Estadísticas Generales</h3>
                     <div class="stats" id="statsGenerales"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para gestión de datos de localStorage -->
+    <div id="modalDatos" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 style="margin: 0; color: #667eea;">🔧 Gestión de Datos</h3>
+                <span class="modal-close" onclick="cerrarGestionDatos()">&times;</span>
+            </div>
+            <div>
+                <h4>Histórico de Comidas</h4>
+                <textarea id="textareaHistorico" placeholder="Datos en formato JSON..."></textarea>
+                <div class="action-buttons" style="margin-top: 10px;">
+                    <button class="btn btn-primary" onclick="guardarHistoricoManual()">💾 Guardar Cambios</button>
+                    <button class="btn btn-success" onclick="copiarHistorico()">📋 Copiar</button>
+                    <button class="btn btn-danger" onclick="borrarTodoHistorico()">🗑️ Borrar Todo</button>
+                </div>
+            </div>
+            <div style="margin-top: 20px;">
+                <h4>Alimentos</h4>
+                <textarea id="textareaAlimentos" placeholder="Datos en formato JSON..."></textarea>
+                <div class="action-buttons" style="margin-top: 10px;">
+                    <button class="btn btn-primary" onclick="guardarAlimentosManual()">💾 Guardar Cambios</button>
+                    <button class="btn btn-success" onclick="copiarAlimentos()">📋 Copiar</button>
                 </div>
             </div>
         </div>
@@ -1056,8 +1228,52 @@
 
             const detalleDiv = document.getElementById('detalleComidas');
             if (comidasDelDia.length > 0) {
-                detalleDiv.innerHTML = `
+                // Version cards para móvil
+                const cardsHTML = `
                     <h4 style="margin-top: 20px; color: #667eea;">Detalle de comidas del día</h4>
+                    <div class="detalle-cards">
+                        ${comidasDelDia.map((comida) => {
+                            const esEjercicio = comida.calorias < 0;
+                            return `
+                            <div class="detalle-card ${esEjercicio ? 'ejercicio' : ''}">
+                                <div class="detalle-card-header">
+                                    <div class="detalle-card-title">${comida.alimento}</div>
+                                    <div class="detalle-card-momento">${comida.momento}</div>
+                                </div>
+                                <div class="detalle-card-info">
+                                    <div class="detalle-card-info-item">
+                                        <span class="detalle-card-info-label">Cantidad:</span>
+                                        <span class="detalle-card-info-value">${esEjercicio ? Math.abs(comida.cantidad) + ' kcal' : comida.cantidad.toFixed(1) + 'g'}</span>
+                                    </div>
+                                    <div class="detalle-card-info-item">
+                                        <span class="detalle-card-info-label">Calorías:</span>
+                                        <span class="detalle-card-info-value">${esEjercicio ? '-' : ''}${Math.abs(comida.calorias).toFixed(0)} kcal</span>
+                                    </div>
+                                    ${!esEjercicio ? `
+                                    <div class="detalle-card-info-item">
+                                        <span class="detalle-card-info-label">Proteínas:</span>
+                                        <span class="detalle-card-info-value">${comida.proteinas.toFixed(1)}g</span>
+                                    </div>
+                                    <div class="detalle-card-info-item">
+                                        <span class="detalle-card-info-label">Grasas:</span>
+                                        <span class="detalle-card-info-value">${comida.grasas.toFixed(1)}g</span>
+                                    </div>
+                                    <div class="detalle-card-info-item">
+                                        <span class="detalle-card-info-label">Hidratos:</span>
+                                        <span class="detalle-card-info-value">${comida.hidratos.toFixed(1)}g</span>
+                                    </div>
+                                    ` : ''}
+                                </div>
+                                <div class="detalle-card-actions">
+                                    <button class="btn btn-danger small-btn" onclick="eliminarComida('${fecha}', ${historico.indexOf(comida)})">🗑️ Eliminar</button>
+                                </div>
+                            </div>
+                        `}).join('')}
+                    </div>
+                `;
+
+                // Version tabla para desktop
+                const tablaHTML = `
                     <table class="summary-table">
                         <thead>
                             <tr>
@@ -1091,6 +1307,8 @@
                         </tbody>
                     </table>
                 `;
+
+                detalleDiv.innerHTML = cardsHTML + tablaHTML;
             } else {
                 detalleDiv.innerHTML = '<p style="margin-top: 20px; text-align: center; color: #999;">No hay comidas registradas para este día</p>';
             }
@@ -1379,44 +1597,107 @@
         }
 
         async function importarHistorico() {
-            try {
-                const response = await fetch('historico_comidas.json');
-                if (response.ok) {
-                    const data = await response.json();
-                    historico = data;
-                    guardarDatos();
-                    actualizarGraficas();
-                    actualizarResumenDia();
-                    mostrarComidasRecientes();
-                    alert('✅ Histórico importado correctamente');
-                    return;
-                }
-            } catch (error) {
-                console.log('Abriendo selector...');
-            }
-            
+            // Siempre abrir selector de archivos (más confiable en móvil)
             const input = document.createElement('input');
             input.type = 'file';
-            input.accept = '.json';
+            input.accept = '.json,application/json';
             input.onchange = e => {
                 const file = e.target.files[0];
-                if (!file) return;
+                if (!file) {
+                    alert('ℹ️ No se seleccionó ningún archivo');
+                    return;
+                }
                 const reader = new FileReader();
                 reader.onload = event => {
                     try {
-                        historico = JSON.parse(event.target.result);
+                        const data = JSON.parse(event.target.result);
+                        historico = data;
                         guardarDatos();
                         actualizarGraficas();
                         actualizarResumenDia();
                         mostrarComidasRecientes();
-                        alert('✅ Histórico importado correctamente');
+                        alert(`✅ Histórico importado correctamente\n${historico.length} comidas cargadas`);
                     } catch (error) {
-                        alert('❌ Error al importar el archivo JSON');
+                        alert('❌ Error al importar el archivo JSON\n' + error.message);
                     }
                 };
                 reader.readAsText(file);
             };
             input.click();
+        }
+
+        // ===== GESTIÓN DE DATOS EN LOCALSTORAGE =====
+        function abrirGestionDatos() {
+            document.getElementById('textareaHistorico').value = JSON.stringify(historico, null, 2);
+            document.getElementById('textareaAlimentos').value = JSON.stringify(alimentos, null, 2);
+            document.getElementById('modalDatos').style.display = 'block';
+        }
+
+        function cerrarGestionDatos() {
+            document.getElementById('modalDatos').style.display = 'none';
+        }
+
+        function guardarHistoricoManual() {
+            try {
+                const texto = document.getElementById('textareaHistorico').value;
+                const datos = JSON.parse(texto);
+                historico = datos;
+                guardarDatos();
+                actualizarGraficas();
+                actualizarResumenDia();
+                mostrarComidasRecientes();
+                alert(`✅ Histórico guardado correctamente\n${historico.length} comidas`);
+            } catch (error) {
+                alert('❌ Error en el formato JSON:\n' + error.message);
+            }
+        }
+
+        function guardarAlimentosManual() {
+            try {
+                const texto = document.getElementById('textareaAlimentos').value;
+                const datos = JSON.parse(texto);
+                alimentos = datos;
+                guardarDatos();
+                alert(`✅ Alimentos guardados correctamente\n${alimentos.length} alimentos`);
+            } catch (error) {
+                alert('❌ Error en el formato JSON:\n' + error.message);
+            }
+        }
+
+        function copiarHistorico() {
+            const textarea = document.getElementById('textareaHistorico');
+            textarea.select();
+            document.execCommand('copy');
+            alert('📋 Histórico copiado al portapapeles');
+        }
+
+        function copiarAlimentos() {
+            const textarea = document.getElementById('textareaAlimentos');
+            textarea.select();
+            document.execCommand('copy');
+            alert('📋 Alimentos copiados al portapapeles');
+        }
+
+        function borrarTodoHistorico() {
+            if (confirm('⚠️ ¿SEGURO que quieres borrar TODO el histórico?\n\nEsta acción no se puede deshacer.')) {
+                if (confirm('🚨 ÚLTIMA CONFIRMACIÓN: Se borrarán ' + historico.length + ' comidas')) {
+                    historico = [];
+                    guardarDatos();
+                    actualizarGraficas();
+                    actualizarResumenDia();
+                    mostrarComidasRecientes();
+                    document.getElementById('textareaHistorico').value = '[]';
+                    alert('✅ Histórico borrado completamente');
+                }
+            }
+        }
+
+        // Cerrar modal al hacer clic fuera
+        window.onclick = function(event) {
+            const modal = document.getElementById('modalDatos');
+            if (event.target == modal) {
+                cerrarGestionDatos();
+            }
         }
     </script>
 </body>
