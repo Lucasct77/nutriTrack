@@ -23,10 +23,10 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            padding: 10px;
+            padding: 5px;
         }
 
-        @media (min-width: 768px) {
+        @media (min-width: 750px) {
             body {
                 padding: 20px;
             }
@@ -36,7 +36,7 @@
             max-width: 1400px;
             margin: 0 auto;
             background: white;
-            border-radius: 20px;
+            border-radius: 12px;
             box-shadow: 0 20px 60px rgba(0,0,0,0.3);
             overflow: hidden;
         }
@@ -44,18 +44,18 @@
         .header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 20px 15px;
+            padding: 25px 20px;
             text-align: center;
             position: relative;
         }
 
         .header h1 {
-            font-size: 1.5em;
-            margin-bottom: 8px;
+            font-size: 1.8em;
+            margin-bottom: 10px;
         }
 
         .header p {
-            font-size: 0.9em;
+            font-size: 1em;
         }
 
         .pwa-badge {
@@ -117,24 +117,31 @@
 
         .tab {
             flex: 1;
-            min-width: 120px;
-            padding: 15px 10px;
+            min-width: 85px;
+            padding: 12px 8px;
             text-align: center;
             cursor: pointer;
             border: none;
             background: none;
-            font-size: 0.9em;
+            font-size: 0.85em;
             font-weight: 600;
             color: #666;
             transition: all 0.3s;
-            white-space: nowrap;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            line-height: 1.2;
         }
 
-        @media (min-width: 768px) {
+        @media (min-width: 750px) {
             .tab {
                 padding: 20px;
                 font-size: 1.1em;
                 min-width: auto;
+                flex-direction: row;
+                gap: 8px;
             }
         }
 
@@ -149,7 +156,7 @@
         }
 
         .content {
-            padding: 15px;
+            padding: 18px;
         }
 
         @media (min-width: 768px) {
@@ -180,10 +187,10 @@
         .form-group input,
         .form-group select {
             width: 100%;
-            padding: 12px;
+            padding: 14px;
             border: 2px solid #e0e0e0;
             border-radius: 8px;
-            font-size: 1em;
+            font-size: 1.05em;
             transition: border 0.3s;
         }
 
@@ -193,11 +200,93 @@
             border-color: #667eea;
         }
 
+        .alimento-search-container {
+            position: relative;
+            width: 100%;
+        }
+
+        .alimento-search-input {
+            width: 100%;
+            padding: 14px;
+            padding-right: 40px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1.05em;
+            transition: border 0.3s;
+        }
+
+        .alimento-search-input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .alimento-search-icon {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #999;
+            pointer-events: none;
+        }
+
+        .alimento-dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            max-height: 300px;
+            overflow-y: auto;
+            background: white;
+            border: 2px solid #667eea;
+            border-top: none;
+            border-radius: 0 0 8px 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 1000;
+            margin-top: -8px;
+        }
+
+        .alimento-dropdown.show {
+            display: block;
+        }
+
+        .alimento-option {
+            padding: 14px;
+            cursor: pointer;
+            border-bottom: 1px solid #f0f0f0;
+            transition: background 0.2s;
+        }
+
+        .alimento-option:hover {
+            background: #f8f9ff;
+        }
+
+        .alimento-option:last-child {
+            border-bottom: none;
+        }
+
+        .alimento-option-nombre {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 4px;
+        }
+
+        .alimento-option-info {
+            font-size: 0.85em;
+            color: #666;
+        }
+
+        .alimento-no-results {
+            padding: 12px;
+            text-align: center;
+            color: #999;
+        }
+
         .btn {
-            padding: 10px 15px;
+            padding: 12px 18px;
             border: none;
             border-radius: 8px;
-            font-size: 0.85em;
+            font-size: 0.95em;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
@@ -309,15 +398,15 @@
         .card {
             background: white;
             border-radius: 12px;
-            padding: 15px;
-            margin-bottom: 15px;
+            padding: 18px;
+            margin-bottom: 18px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
 
         .card h3 {
             color: #667eea;
-            margin-bottom: 12px;
-            font-size: 1.2em;
+            margin-bottom: 14px;
+            font-size: 1.3em;
         }
 
         @media (min-width: 768px) {
@@ -349,19 +438,19 @@
         .stat-card {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 12px;
+            padding: 15px;
             border-radius: 12px;
             text-align: center;
         }
 
         .stat-card h4 {
-            font-size: 0.75em;
-            margin-bottom: 8px;
+            font-size: 0.85em;
+            margin-bottom: 10px;
             opacity: 0.9;
         }
 
         .stat-card p {
-            font-size: 1.3em;
+            font-size: 1.5em;
             font-weight: bold;
         }
 
@@ -437,18 +526,18 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px;
+            padding: 12px;
             background: #f8f9fa;
             border-radius: 8px;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
         }
 
         .comida-item strong {
-            font-size: 0.95em;
+            font-size: 1em;
         }
 
         .comida-item small {
-            font-size: 0.8em;
+            font-size: 0.85em;
         }
 
         @media (min-width: 768px) {
@@ -530,8 +619,8 @@
         .detalle-card {
             background: #f8f9fa;
             border-radius: 8px;
-            padding: 12px;
-            margin-bottom: 10px;
+            padding: 14px;
+            margin-bottom: 12px;
             border-left: 4px solid #667eea;
         }
 
@@ -550,7 +639,7 @@
         .detalle-card-title {
             font-weight: bold;
             color: #667eea;
-            font-size: 1.05em;
+            font-size: 1.1em;
         }
 
         .detalle-card.ejercicio .detalle-card-title {
@@ -572,9 +661,9 @@
         .detalle-card-info {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 8px;
-            margin-top: 8px;
-            font-size: 0.9em;
+            gap: 10px;
+            margin-top: 10px;
+            font-size: 0.95em;
         }
 
         .detalle-card-info-item {
@@ -712,76 +801,17 @@
         </div>
 
         <div class="tabs">
-            <button class="tab active" onclick="switchTab('alimentos')">📋 Alimentos</button>
-            <button class="tab" onclick="switchTab('diario')">📅 Diario </button>
+            <button class="tab active" onclick="switchTab('diario')">📅 Diario</button>
             <button class="tab" onclick="switchTab('estadisticas')">📊 Estadísticas</button>
+            <button class="tab" onclick="switchTab('alimentos')">📋 Alimentos</button>
+            <button class="tab" onclick="switchTab('configuracion')">⚙️ Config</button>
         </div>
 
         <div class="content">
-            <!-- TAB 1: Gestión de Alimentos -->
-            <div id="alimentos" class="tab-content active">
-                <div class="card">
-                    <h3>Añadir/Editar Alimento</h3>
-                    <form id="formAlimento" class="grid-form">
-                        <input type="hidden" id="editIndex" value="">
-                        <div class="form-group">
-                            <label>Nombre del Alimento</label>
-                            <input type="text" id="nombreAlimento" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Peso por ración (g)</label>
-                            <input type="number" id="pesoAlimento" step="0.1" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Calorías (kcal)</label>
-                            <input type="number" id="caloriasAlimento" step="0.1" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Grasas (g)</label>
-                            <input type="number" id="grasasAlimento" step="0.1" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Proteínas (g)</label>
-                            <input type="number" id="proteinasAlimento" step="0.1" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Hidratos (g)</label>
-                            <input type="number" id="hidratosAlimento" step="0.1" required>
-                        </div>
-                    </form>
-                    <div class="action-buttons">
-                        <button class="btn btn-primary" onclick="guardarAlimento()">💾 Guardar Alimento</button>
-                        <button class="btn btn-warning" onclick="cancelarEdicion()">❌ Cancelar</button>
-                    </div>
-                </div>
 
-                <div class="card">
-                    <h3>Lista de Alimentos</h3>
-                    <div class="action-buttons">
-                        <button class="btn btn-success" onclick="exportarAlimentos()">📥 Exportar JSON</button>
-                        <button class="btn btn-primary" onclick="importarAlimentos()">📤 Importar JSON</button>
-                    </div>
-                    <div class="table-container">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Nombre</th>
-                                    <th>Peso (g)</th>
-                                    <th>Calorías</th>
-                                    <th>Grasas (g)</th>
-                                    <th>Proteínas (g)</th>
-                                    <th>Hidratos (g)</th>
-                                    <th>Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody id="listaAlimentos"></tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
 
             <!-- TAB 2: Diario de Comidas -->
-            <div id="diario" class="tab-content">
+            <div id="diario" class="tab-content active">
                 <div class="card">
                     <h3>Añadir Comida del Día</h3>
                     <form id="formComidaDia" class="grid-form">
@@ -791,7 +821,17 @@
                         </div>
                         <div class="form-group">
                             <label>Alimento</label>
-                            <select id="alimentoSelect" required></select>
+                            <div class="alimento-search-container">
+                                <input type="text" 
+                                       id="alimentoSearchInput" 
+                                       class="alimento-search-input" 
+                                       placeholder="Buscar alimento..."
+                                       autocomplete="off"
+                                       required>
+                                <span class="alimento-search-icon">🔍</span>
+                                <div id="alimentoDropdown" class="alimento-dropdown"></div>
+                                <input type="hidden" id="alimentoSelect" required>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label>Cantidad (gramos)</label>
@@ -850,16 +890,15 @@
                     <div class="filter-group">
                         <div>
                             <label>Desde:</label>
-                            <input type="date" id="filtroDesde" onchange="actualizarGraficas()">
+                            <input type="date" id="filtroDesde" onchange="actualizarDatosEstadisticas()()">
                         </div>
                         <div>
                             <label>Hasta:</label>
-                            <input type="date" id="filtroHasta" onchange="actualizarGraficas()">
+                            <input type="date" id="filtroHasta" onchange="actualizarDatosEstadisticas()()">
                         </div>
                         <div>
                             <label>Periodo:</label>
                             <select id="filtroPeriodo" onchange="aplicarFiltroPeriodo()">
-                                <option value="">Personalizado</option>
                                 <option value="7">Última semana</option>
                                 <option value="30">Último mes</option>
                                 <option value="90">Últimos 3 meses</option>
@@ -877,11 +916,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="action-buttons">
-                        <button class="btn btn-success" onclick="exportarHistorico()">📥 Exportar Histórico</button>
-                        <button class="btn btn-primary" onclick="importarHistorico()">📤 Importar Histórico</button>
-                        <button class="btn btn-warning" onclick="abrirGestionDatos()">🔧 Gestionar Datos</button>
-                    </div>
+                    <!-- Botones movidos a Configuración -->
                 </div>
 
                 <div class="card">
@@ -894,6 +929,114 @@
                 <div class="card">
                     <h3>Estadísticas Generales</h3>
                     <div class="stats" id="statsGenerales"></div>
+                </div>
+            </div>
+
+            <!-- TAB 1: Gestión de Alimentos -->
+            <div id="alimentos" class="tab-content">
+                <div class="card">
+                    <h3>Añadir/Editar Alimento</h3>
+                    <form id="formAlimento" class="grid-form">
+                        <input type="hidden" id="editIndex" value="">
+                        <div class="form-group">
+                            <label>Nombre del Alimento</label>
+                            <input type="text" id="nombreAlimento" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Peso por ración (g)</label>
+                            <input type="number" id="pesoAlimento" step="0.1" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Calorías (kcal)</label>
+                            <input type="number" id="caloriasAlimento" step="0.1" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Grasas (g)</label>
+                            <input type="number" id="grasasAlimento" step="0.1" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Proteínas (g)</label>
+                            <input type="number" id="proteinasAlimento" step="0.1" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Hidratos (g)</label>
+                            <input type="number" id="hidratosAlimento" step="0.1" required>
+                        </div>
+                    </form>
+                    <div class="action-buttons">
+                        <button class="btn btn-primary" onclick="guardarAlimento()">💾 Guardar Alimento</button>
+                        <button class="btn btn-warning" onclick="cancelarEdicion()">❌ Cancelar</button>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>Lista de Alimentos</h3>
+                    <!-- Botones movidos a Configuración -->
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Peso (g)</th>
+                                    <th>Calorías</th>
+                                    <th>Grasas (g)</th>
+                                    <th>Proteínas (g)</th>
+                                    <th>Hidratos (g)</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="listaAlimentos"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 4: Configuración -->
+            <div id="configuracion" class="tab-content">
+                <div class="card">
+                    <h3>⚙️ Configuración Personal</h3>
+                    <form class="grid-form">
+                        <div class="form-group">
+                            <label>Peso Corporal (kg)</label>
+                            <input type="number" id="pesoUsuario" step="0.1" placeholder="75" onchange="guardarConfiguracion()">
+                        </div>
+                        <div class="form-group">
+                            <label>Objetivo Proteínas (g/kg)</label>
+                            <input type="number" id="objetivoProteinas" step="0.1" placeholder="2.0" onchange="guardarConfiguracion()">
+                        </div>
+                        <div class="form-group">
+                            <label>Objetivo Grasas (g/kg)</label>
+                            <input type="number" id="objetivoGrasas" step="0.1" placeholder="1.0" onchange="guardarConfiguracion()">
+                        </div>
+                        <div class="form-group">
+                            <label>Objetivo Hidratos (g/kg)</label>
+                            <input type="number" id="objetivoHidratos" step="0.1" placeholder="3.0" onchange="guardarConfiguracion()">
+                        </div>
+                    </form>
+                    <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin-top: 15px;">
+                        <div id="objetivosCalculados" style="color: #495057;">
+                            <!-- Se llenará dinámicamente -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>📂 Gestión de Datos</h3>
+                    <div class="action-buttons">
+                        <button class="btn btn-warning" onclick="abrirGestionDatos()">🔧 Ver/Editar localStorage</button>
+                        <button class="btn btn-success" onclick="exportarAlimentos()">📥 Exportar Alimentos</button>
+                        <button class="btn btn-primary" onclick="importarAlimentos()">📤 Importar Alimentos</button>
+                        <button class="btn btn-success" onclick="exportarHistorico()">📥 Exportar Histórico</button>
+                        <button class="btn btn-primary" onclick="importarHistorico()">📤 Importar Histórico</button>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>ℹ️ Información</h3>
+                    <p style="margin-bottom: 10px;"><strong>Versión:</strong> 1.0 PWA</p>
+                    <p style="margin-bottom: 10px;"><strong>Datos guardados en:</strong> localStorage del navegador</p>
+                    <p style="margin-bottom: 10px;"><strong>Alimentos:</strong> <span id="contadorAlimentos">0</span></p>
+                    <p style="margin-bottom: 10px;"><strong>Comidas registradas:</strong> <span id="contadorHistorico">0</span></p>
                 </div>
             </div>
         </div>
@@ -973,10 +1116,17 @@
         let alimentos = [];
         let historico = [];
         let chart = null;
+        let configuracion = {
+            peso: 75,
+            objetivoProteinas: 2.0,
+            objetivoGrasas: 1.0,
+            objetivoHidratos: 3.0
+        };
 
         // Inicialización
         document.addEventListener('DOMContentLoaded', function() {
             cargarDatos();
+            cargarConfiguracion();
             document.getElementById('fechaComida').valueAsDate = new Date();
             document.getElementById('fechaActividad').valueAsDate = new Date();
             document.getElementById('fechaResumen').valueAsDate = new Date();
@@ -985,8 +1135,11 @@
             const hace30Dias = new Date();
             hace30Dias.setDate(hace30Dias.getDate() - 30);
             document.getElementById('filtroDesde').value = hace30Dias.toISOString().split('T')[0];
+            
+            // Cargar tab Diario por defecto
+            actualizarSelectAlimentos();
             actualizarResumenDia();
-            actualizarGraficas();
+            mostrarComidasRecientes();
         });
 
         // Gestión de tabs
@@ -1002,8 +1155,11 @@
                 actualizarResumenDia();
                 mostrarComidasRecientes();
             } else if (tabName === 'estadisticas') {
-                actualizarGraficas();
-                actualizarEstadisticasGenerales();
+                aplicarFiltroPeriodo();
+            } else if (tabName === 'alimentos') {
+                mostrarAlimentos();
+            } else if (tabName === 'configuracion') {
+                actualizarContadores();
             }
         }
 
@@ -1087,21 +1243,70 @@
         }
 
         // ===== DIARIO DE COMIDAS =====
+        let alimentosOrdenados = [];
+
         function actualizarSelectAlimentos() {
-            const select = document.getElementById('alimentoSelect');
-            select.innerHTML = '<option value="">Seleccionar alimento...</option>';
-            
             // Crear un array con los índices originales y ordenarlo alfabéticamente
-            const alimentosOrdenados = alimentos
+            alimentosOrdenados = alimentos
                 .map((alimento, index) => ({ alimento, index }))
                 .sort((a, b) => a.alimento.nombre.localeCompare(b.alimento.nombre));
             
-            alimentosOrdenados.forEach(({ alimento, index }) => {
-                const option = document.createElement('option');
-                option.value = index;
-                option.textContent = `${alimento.nombre} (${alimento.peso}g - ${alimento.calorias}kcal)`;
-                select.appendChild(option);
+            // Configurar el buscador de alimentos
+            const searchInput = document.getElementById('alimentoSearchInput');
+            const dropdown = document.getElementById('alimentoDropdown');
+            const hiddenSelect = document.getElementById('alimentoSelect');
+            
+            // Mostrar dropdown al hacer foco
+            searchInput.addEventListener('focus', () => {
+                mostrarAlimentosDropdown('');
             });
+            
+            // Filtrar mientras se escribe
+            searchInput.addEventListener('input', (e) => {
+                mostrarAlimentosDropdown(e.target.value);
+            });
+            
+            // Cerrar dropdown al hacer clic fuera
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('.alimento-search-container')) {
+                    dropdown.classList.remove('show');
+                }
+            });
+        }
+        
+        function mostrarAlimentosDropdown(filtro) {
+            const dropdown = document.getElementById('alimentoDropdown');
+            const searchInput = document.getElementById('alimentoSearchInput');
+            const hiddenSelect = document.getElementById('alimentoSelect');
+            
+            const filtroLower = filtro.toLowerCase();
+            const alimentosFiltrados = alimentosOrdenados.filter(({ alimento }) => 
+                alimento.nombre.toLowerCase().includes(filtroLower)
+            );
+            
+            if (alimentosFiltrados.length === 0) {
+                dropdown.innerHTML = '<div class="alimento-no-results">No se encontraron alimentos</div>';
+            } else {
+                dropdown.innerHTML = alimentosFiltrados.map(({ alimento, index }) => `
+                    <div class="alimento-option" data-index="${index}">
+                        <div class="alimento-option-nombre">${alimento.nombre}</div>
+                        <div class="alimento-option-info">${alimento.peso}g - ${alimento.calorias}kcal</div>
+                    </div>
+                `).join('');
+                
+                // Añadir event listeners a las opciones
+                dropdown.querySelectorAll('.alimento-option').forEach(option => {
+                    option.addEventListener('click', () => {
+                        const index = option.getAttribute('data-index');
+                        const alimento = alimentos[index];
+                        searchInput.value = alimento.nombre;
+                        hiddenSelect.value = index;
+                        dropdown.classList.remove('show');
+                    });
+                });
+            }
+            
+            dropdown.classList.add('show');
         }
 
         function agregarActividad() {
@@ -1320,7 +1525,7 @@
                 guardarDatos();
                 actualizarResumenDia();
                 mostrarComidasRecientes();
-                actualizarGraficas();
+                // actualizarGraficas();
             }
         }
 
@@ -1359,9 +1564,14 @@
 
             document.getElementById('filtroDesde').value = desde.toISOString().split('T')[0];
             document.getElementById('filtroHasta').value = hoy.toISOString().split('T')[0];
-            actualizarGraficas();
+            actualizarDatosEstadisticas();
         }
-
+        
+        function actualizarDatosEstadisticas() {
+            actualizarGraficas();
+            actualizarEstadisticasGenerales();
+        }
+        
         function actualizarGraficas() {
             const desde = document.getElementById('filtroDesde').value;
             const hasta = document.getElementById('filtroHasta').value;
@@ -1415,19 +1625,45 @@
                 hidratos: '#667eea'
             };
 
+            // Calcular línea de objetivo basada en la métrica
+            const objetivos = {
+                proteinas: configuracion.peso * configuracion.objetivoProteinas,
+                grasas: configuracion.peso * configuracion.objetivoGrasas,
+                hidratos: configuracion.peso * configuracion.objetivoHidratos
+            };
+
+            // Datasets para la gráfica
+            const datasets = [{
+                label: labels[metrica],
+                data: valores,
+                borderColor: colores[metrica] || '#667eea',
+                backgroundColor: metrica === 'caloriasQuemadas' ? 'rgba(255, 107, 107, 0.1)' : metrica === 'balance' ? 'rgba(40, 167, 69, 0.1)' : 'rgba(102, 126, 234, 0.1)',
+                borderWidth: 3,
+                fill: true,
+                tension: 0.4
+            }];
+
+            // Añadir línea de objetivo si es proteínas, grasas o hidratos
+            if (objetivos[metrica]) {
+                const valorObjetivo = objetivos[metrica];
+                datasets.push({
+                    label: 'Objetivo (' + valorObjetivo.toFixed(0) + 'g)',
+                    data: Array(fechas.length).fill(valorObjetivo),
+                    borderColor: '#ffc107',
+                    backgroundColor: 'transparent',
+                    borderWidth: 2,
+                    borderDash: [10, 5],
+                    fill: false,
+                    pointRadius: 0,
+                    tension: 0
+                });
+            }
+
             chart = new Chart(ctx, {
                 type: 'line',
                 data: {
                     labels: fechas,
-                    datasets: [{
-                        label: labels[metrica],
-                        data: valores,
-                        borderColor: colores[metrica] || '#667eea',
-                        backgroundColor: metrica === 'caloriasQuemadas' ? 'rgba(255, 107, 107, 0.1)' : metrica === 'balance' ? 'rgba(40, 167, 69, 0.1)' : 'rgba(102, 126, 234, 0.1)',
-                        borderWidth: 3,
-                        fill: true,
-                        tension: 0.4
-                    }]
+                    datasets: datasets
                 },
                 options: {
                     responsive: true,
@@ -1448,36 +1684,56 @@
         }
 
         function actualizarEstadisticasGenerales() {
-            if (historico.length === 0) {
-                document.getElementById('statsGenerales').innerHTML = '<p style="text-align: center; color: #999;">No hay datos suficientes</p>';
+            // Obtener el rango de fechas seleccionado
+            const desde = document.getElementById('filtroDesde').value;
+            const hasta = document.getElementById('filtroHasta').value;
+            
+            // Filtrar comidas del periodo seleccionado
+            const comidasPeriodo = historico.filter(c => c.fecha >= desde && c.fecha <= hasta);
+            
+            if (comidasPeriodo.length === 0) {
+                document.getElementById('statsGenerales').innerHTML = '<p style="text-align: center; color: #999;">No hay datos en el periodo seleccionado</p>';
                 return;
             }
 
-            let totalCalorias = 0, totalProteinas = 0, totalGrasas = 0, totalHidratos = 0;
+            // Calcular totales separando consumo y ejercicio
+            let totalCaloriasConsumidas = 0, totalCaloriasQuemadas = 0;
+            let totalProteinas = 0, totalGrasas = 0, totalHidratos = 0;
             const fechasUnicas = new Set();
 
-            historico.forEach(comida => {
-                totalCalorias += comida.calorias;
-                totalProteinas += comida.proteinas;
-                totalGrasas += comida.grasas;
-                totalHidratos += comida.hidratos;
+            comidasPeriodo.forEach(comida => {
                 fechasUnicas.add(comida.fecha);
+                if (comida.calorias >= 0) {
+                    totalCaloriasConsumidas += comida.calorias;
+                    totalProteinas += comida.proteinas;
+                    totalGrasas += comida.grasas;
+                    totalHidratos += comida.hidratos;
+                } else {
+                    totalCaloriasQuemadas += Math.abs(comida.calorias);
+                }
             });
 
             const numDias = fechasUnicas.size;
-            const promedioCalorias = totalCalorias / numDias;
+            const balance = totalCaloriasConsumidas - totalCaloriasQuemadas;
+            const promedioCaloriasConsumidas = totalCaloriasConsumidas / numDias;
+            const promedioCaloriasQuemadas = totalCaloriasQuemadas / numDias;
+            const promedioBalance = balance / numDias;
             const promedioProteinas = totalProteinas / numDias;
             const promedioGrasas = totalGrasas / numDias;
             const promedioHidratos = totalHidratos / numDias;
 
             document.getElementById('statsGenerales').innerHTML = `
                 <div class="stat-card">
-                    <h4>Días registrados</h4>
-                    <p>${numDias}</p>
+                    <h4>Promedio Calorías Consumidas/día</h4>
+                    <p>${promedioCaloriasConsumidas.toFixed(0)} kcal</p>
                 </div>
-                <div class="stat-card">
-                    <h4>Promedio Calorías/día</h4>
-                    <p>${promedioCalorias.toFixed(0)} kcal</p>
+                <div class="stat-card" style="background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);">
+                    <h4>Promedio Calorías Quemadas/día</h4>
+                    <p>${promedioCaloriasQuemadas.toFixed(0)} kcal</p>
+                </div>
+                <div class="stat-card" style="background: linear-gradient(135deg, ${promedioBalance >= 0 ? '#ffc107, #ffb300' : '#28a745, #20c997'});">
+                    <h4>Promedio Balance Calórico/día</h4>
+                    <p>${promedioBalance > 0 ? '+' : ''}${promedioBalance.toFixed(0)} kcal</p>
                 </div>
                 <div class="stat-card">
                     <h4>Promedio Proteínas/día</h4>
@@ -1491,9 +1747,13 @@
                     <h4>Promedio Hidratos/día</h4>
                     <p>${promedioHidratos.toFixed(1)} g</p>
                 </div>
-                <div class="stat-card">
+                <div class="stat-card" style="background: linear-gradient(135deg, #a8dadc 0%, #81c3d7 100%);">
+                    <h4>Días en periodo</h4>
+                    <p>${numDias}</p>
+                </div>
+                <div class="stat-card" style="background: linear-gradient(135deg, #d4a5a5 0%, #c48c8c 100%);">
                     <h4>Total Comidas</h4>
-                    <p>${historico.length}</p>
+                    <p>${comidasPeriodo.length}</p>
                 </div>
             `;
         }
@@ -1613,7 +1873,7 @@
                         const data = JSON.parse(event.target.result);
                         historico = data;
                         guardarDatos();
-                        actualizarGraficas();
+                        // actualizarGraficas();
                         actualizarResumenDia();
                         mostrarComidasRecientes();
                         alert(`✅ Histórico importado correctamente\n${historico.length} comidas cargadas`);
@@ -1643,7 +1903,7 @@
                 const datos = JSON.parse(texto);
                 historico = datos;
                 guardarDatos();
-                actualizarGraficas();
+                // actualizarGraficas();
                 actualizarResumenDia();
                 mostrarComidasRecientes();
                 alert(`✅ Histórico guardado correctamente\n${historico.length} comidas`);
@@ -1683,13 +1943,85 @@
                 if (confirm('🚨 ÚLTIMA CONFIRMACIÓN: Se borrarán ' + historico.length + ' comidas')) {
                     historico = [];
                     guardarDatos();
-                    actualizarGraficas();
+                    // actualizarGraficas();
                     actualizarResumenDia();
                     mostrarComidasRecientes();
                     document.getElementById('textareaHistorico').value = '[]';
                     alert('✅ Histórico borrado completamente');
                 }
             }
+        }
+
+        // ===== CONFIGURACIÓN DEL USUARIO =====
+        function guardarConfiguracion() {
+            const peso = parseFloat(document.getElementById('pesoUsuario').value);
+            const objProteinas = parseFloat(document.getElementById('objetivoProteinas').value);
+            const objGrasas = parseFloat(document.getElementById('objetivoGrasas').value);
+            const objHidratos = parseFloat(document.getElementById('objetivoHidratos').value);
+
+            if (isNaN(peso) || peso <= 0) {
+                alert('⚠️ Por favor, introduce un peso válido');
+                return;
+            }
+            if (isNaN(objProteinas) || objProteinas < 0) {
+                alert('⚠️ Por favor, introduce un objetivo válido para proteínas');
+                return;
+            }
+            if (isNaN(objGrasas) || objGrasas < 0) {
+                alert('⚠️ Por favor, introduce un objetivo válido para grasas');
+                return;
+            }
+            if (isNaN(objHidratos) || objHidratos < 0) {
+                alert('⚠️ Por favor, introduce un objetivo válido para hidratos');
+                return;
+            }
+
+            configuracion.peso = peso;
+            configuracion.objetivoProteinas = objProteinas;
+            configuracion.objetivoGrasas = objGrasas;
+            configuracion.objetivoHidratos = objHidratos;
+
+            localStorage.setItem('configuracion', JSON.stringify(configuracion));
+            
+            actualizarObjetivosCalculados();
+            // actualizarGraficas(); // Actualizar gráficas para mostrar nuevas líneas objetivo
+            
+            alert('✅ Configuración guardada correctamente');
+        }
+
+        function cargarConfiguracion() {
+            const configGuardada = localStorage.getItem('configuracion');
+            if (configGuardada) {
+                configuracion = JSON.parse(configGuardada);
+            }
+
+            // Cargar valores en los inputs
+            document.getElementById('pesoUsuario').value = configuracion.peso;
+            document.getElementById('objetivoProteinas').value = configuracion.objetivoProteinas;
+            document.getElementById('objetivoGrasas').value = configuracion.objetivoGrasas;
+            document.getElementById('objetivoHidratos').value = configuracion.objetivoHidratos;
+
+            actualizarObjetivosCalculados();
+        }
+
+        function actualizarObjetivosCalculados() {
+            const proteinasTotal = (configuracion.peso * configuracion.objetivoProteinas).toFixed(0);
+            const grasasTotal = (configuracion.peso * configuracion.objetivoGrasas).toFixed(0);
+            const hidratosTotal = (configuracion.peso * configuracion.objetivoHidratos).toFixed(0);
+
+            document.getElementById('objetivosCalculados').innerHTML = `
+                <p><strong>Objetivos diarios calculados (${configuracion.peso}kg):</strong></p>
+                <ul>
+                    <li>Proteínas: <strong>${proteinasTotal}g</strong> (${configuracion.objetivoProteinas}g/kg)</li>
+                    <li>Grasas: <strong>${grasasTotal}g</strong> (${configuracion.objetivoGrasas}g/kg)</li>
+                    <li>Hidratos: <strong>${hidratosTotal}g</strong> (${configuracion.objetivoHidratos}g/kg)</li>
+                </ul>
+            `;
+        }
+
+        function actualizarContadores() {
+            document.getElementById('contadorAlimentos').textContent = alimentos.length;
+            document.getElementById('contadorHistorico').textContent = historico.length;
         }
 
         // Cerrar modal al hacer clic fuera
