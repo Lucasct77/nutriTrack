@@ -409,6 +409,47 @@
             font-size: 1.3em;
         }
 
+        .card-collapsible .card-header {
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: -20px -20px 15px -20px;
+            padding: 15px 20px;
+            border-radius: 12px 12px 0 0;
+            transition: background 0.2s;
+        }
+
+        .card-collapsible .card-header:hover {
+            background: #f8f9fa;
+        }
+
+        .card-collapsible .card-header h3 {
+            margin: 0;
+        }
+
+        .card-toggle-icon {
+            font-size: 1.2em;
+            transition: transform 0.3s;
+            color: #667eea;
+        }
+
+        .card-collapsible.collapsed .card-toggle-icon {
+            transform: rotate(-90deg);
+        }
+
+        .card-content {
+            transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+            overflow: hidden;
+            max-height: 5000px;
+        }
+
+        .card-collapsible.collapsed .card-content {
+            max-height: 0 !important;
+            opacity: 0;
+            margin: 0;
+        }
+
         @media (min-width: 768px) {
             .card {
                 padding: 25px;
@@ -812,48 +853,81 @@
 
             <!-- TAB 2: Diario de Comidas -->
             <div id="diario" class="tab-content active">
-                <div class="card">
-                    <h3>Añadir Comida del Día</h3>
-                    <form id="formComidaDia" class="grid-form">
-                        <div class="form-group">
-                            <label>Fecha</label>
-                            <input type="date" id="fechaComida" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Alimento</label>
-                            <div class="alimento-search-container">
-                                <input type="text" 
-                                       id="alimentoSearchInput" 
-                                       class="alimento-search-input" 
-                                       placeholder="Buscar alimento..."
-                                       autocomplete="off"
-                                       required>
-                                <span class="alimento-search-icon">🔍</span>
-                                <div id="alimentoDropdown" class="alimento-dropdown"></div>
-                                <input type="hidden" id="alimentoSelect" required>
+                <div class="card card-collapsible">
+                    <div class="card-header" onclick="toggleCard(this)">
+                        <h3>Añadir Comida del Día</h3>
+                        <span class="card-toggle-icon">▼</span>
+                    </div>
+                    <div class="card-content">
+                        <form id="formComidaDia" class="grid-form">
+                            <div class="form-group">
+                                <label>Fecha</label>
+                                <input type="date" id="fechaComida" required>
                             </div>
+                            <div class="form-group">
+                                <label>Alimento</label>
+                                <div class="alimento-search-container">
+                                    <input type="text" 
+                                        id="alimentoSearchInput" 
+                                        class="alimento-search-input" 
+                                        placeholder="Buscar alimento..."
+                                        autocomplete="off"
+                                        required>
+                                    <span class="alimento-search-icon">🔍</span>
+                                    <div id="alimentoDropdown" class="alimento-dropdown"></div>
+                                    <input type="hidden" id="alimentoSelect" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Cantidad (gramos)</label>
+                                <input type="number" id="cantidadComida" step="0.1" value="100" required>
+                            </div>
+                        </form>
+                        <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 20px;">
+                            <button class="btn btn-primary" onclick="agregarComidaDia()" style="flex: 1; min-width: 180px;">➤ Añadir Comida</button>
+                            <button class="btn btn-success" onclick="agregarComidasDiarias()" style="flex: 1; min-width: 180px;">📅 Añadir Comidas Diarias</button>
                         </div>
-                        <div class="form-group">
-                            <label>Cantidad (gramos)</label>
-                            <input type="number" id="cantidadComida" step="0.1" value="100" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Momento del día</label>
-                            <select id="momentoDia" required>
-                                <option value="Desayuno">Desayuno</option>
-                                <option value="Media mañana">Media mañana</option>
-                                <option value="Comida">Comida</option>
-                                <option value="Merienda">Merienda</option>
-                                <option value="Cena">Cena</option>
-                                <option value="Otro">Otro</option>
-                            </select>
-                        </div>
-                    </form>
-                    <button class="btn btn-primary" onclick="agregarComidaDia()">➕ Añadir Comida</button>
+                    </div>
                 </div>
 
-                <div class="card">
-                    <h3>Registrar Calorías Quemadas</h3>
+                <div class="card card-collapsible collapsed">
+                    <div class="card-header" onclick="toggleCard(this)">
+                        <h3>Añadir Macros Manualmente</h3>
+                        <span class="card-toggle-icon">▼</span>
+                    </div>
+                    <div class="card-content">
+                    <form id="formMacrosManual" class="grid-form">
+                        <div class="form-group">
+                            <label>Fecha</label>
+                            <input type="date" id="fechaMacrosManual" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Calorías (kcal)</label>
+                            <input type="number" id="caloriasManuales" step="0.1" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Proteínas (g)</label>
+                            <input type="number" id="proteinasManuales" step="0.1" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Grasas (g)</label>
+                            <input type="number" id="grasasManuales" step="0.1" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Hidratos (g)</label>
+                            <input type="number" id="hidratosManuales" step="0.1" required>
+                        </div>
+                    </form>
+                    <button class="btn btn-primary" onclick="agregarMacrosManual()">➕ Añadir Macros</button>
+                    </div>
+                </div>
+
+                <div class="card card-collapsible collapsed">
+                    <div class="card-header" onclick="toggleCard(this)">
+                        <h3>Registrar Calorías Quemadas</h3>
+                        <span class="card-toggle-icon">▼</span>
+                    </div>
+                    <div class="card-content">
                     <form id="formActividad" class="grid-form">
                         <div class="form-group">
                             <label>Fecha</label>
@@ -865,21 +939,32 @@
                         </div>
                     </form>
                     <button class="btn btn-success" onclick="agregarActividad()">🔥 Añadir Calorías Quemadas</button>
+                    </div>
                 </div>
 
-                <div class="card">
-                    <h3>Resumen del Día</h3>
+                <div class="card card-collapsible">
+                    <div class="card-header" onclick="toggleCard(this)">
+                        <h3>Resumen del Día</h3>
+                        <span class="card-toggle-icon">▼</span>
+                    </div>
+                    <div class="card-content">
                     <div class="form-group">
                         <label>Seleccionar Fecha</label>
                         <input type="date" id="fechaResumen" onchange="actualizarResumenDia()">
                     </div>
                     <div class="stats" id="statsResumen"></div>
                     <div id="detalleComidas"></div>
+                    </div>
                 </div>
 
-                <div class="card">
-                    <h3>Comidas Recientes</h3>
+                <div class="card card-collapsible collapsed">
+                    <div class="card-header" onclick="toggleCard(this)">
+                        <h3>Comidas Recientes</h3>
+                        <span class="card-toggle-icon">▼</span>
+                    </div>
+                    <div class="card-content">
                     <div id="comidasRecientes"></div>
+                    </div>
                 </div>
             </div>
 
@@ -962,6 +1047,10 @@
                             <label>Hidratos (g)</label>
                             <input type="number" id="hidratosAlimento" step="0.1" required>
                         </div>
+                        <div class="form-group">
+                            <label>Cantidad Diaria (g)</label>
+                            <input type="number" id="cantidadDiaria" step="0.1" value="0" placeholder="0 = no incluir">
+                        </div>
                     </form>
                     <div class="action-buttons">
                         <button class="btn btn-primary" onclick="guardarAlimento()">💾 Guardar Alimento</button>
@@ -982,6 +1071,7 @@
                                     <th>Grasas (g)</th>
                                     <th>Proteínas (g)</th>
                                     <th>Hidratos (g)</th>
+                                    <th>Cant. Diaria</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
@@ -1112,6 +1202,12 @@
             document.getElementById('offlineIndicator').classList.add('show');
         });
 
+        // Función para colapsar/expandir cards
+        function toggleCard(headerElement) {
+            const card = headerElement.closest('.card-collapsible');
+            card.classList.toggle('collapsed');
+        }
+
         // Variables globales
         let alimentos = [];
         let historico = [];
@@ -1128,6 +1224,7 @@
             cargarDatos();
             cargarConfiguracion();
             document.getElementById('fechaComida').valueAsDate = new Date();
+            document.getElementById('fechaMacrosManual').valueAsDate = new Date();
             document.getElementById('fechaActividad').valueAsDate = new Date();
             document.getElementById('fechaResumen').valueAsDate = new Date();
             const hoy = new Date().toISOString().split('T')[0];
@@ -1171,6 +1268,7 @@
             const grasas = parseFloat(document.getElementById('grasasAlimento').value);
             const proteinas = parseFloat(document.getElementById('proteinasAlimento').value);
             const hidratos = parseFloat(document.getElementById('hidratosAlimento').value);
+            const cantidadDiaria = parseFloat(document.getElementById('cantidadDiaria').value) || 0;
             const editIndex = document.getElementById('editIndex').value;
 
             if (!nombre) {
@@ -1178,7 +1276,7 @@
                 return;
             }
 
-            const alimento = { nombre, peso, calorias, grasas, proteinas, hidratos };
+            const alimento = { nombre, peso, calorias, grasas, proteinas, hidratos, cantidadDiaria };
 
             if (editIndex !== '') {
                 alimentos[parseInt(editIndex)] = alimento;
@@ -1199,6 +1297,7 @@
             document.getElementById('grasasAlimento').value = alimento.grasas;
             document.getElementById('proteinasAlimento').value = alimento.proteinas;
             document.getElementById('hidratosAlimento').value = alimento.hidratos;
+            document.getElementById('cantidadDiaria').value = alimento.cantidadDiaria || 0;
             document.getElementById('editIndex').value = index;
             window.scrollTo(0, 0);
         }
@@ -1226,6 +1325,7 @@
 
             alimentos.forEach((alimento, index) => {
                 const tr = document.createElement('tr');
+                const cantDiaria = alimento.cantidadDiaria || 0;
                 tr.innerHTML = `
                     <td>${alimento.nombre}</td>
                     <td>${alimento.peso.toFixed(1)}</td>
@@ -1233,6 +1333,7 @@
                     <td>${alimento.grasas.toFixed(1)}</td>
                     <td>${alimento.proteinas.toFixed(1)}</td>
                     <td>${alimento.hidratos.toFixed(1)}</td>
+                    <td style="${cantDiaria > 0 ? 'font-weight: bold; color: #667eea;' : 'color: #999;'}">${cantDiaria > 0 ? cantDiaria.toFixed(1) + 'g' : '-'}</td>
                     <td>
                         <button class="btn btn-warning small-btn" onclick="editarAlimento(${index})">✏️ Editar</button>
                         <button class="btn btn-danger small-btn" onclick="eliminarAlimento(${index})">🗑️ Eliminar</button>
@@ -1301,12 +1402,54 @@
                         const alimento = alimentos[index];
                         searchInput.value = alimento.nombre;
                         hiddenSelect.value = index;
+                        document.getElementById('cantidadComida').value = alimento.peso;
                         dropdown.classList.remove('show');
                     });
                 });
             }
             
             dropdown.classList.add('show');
+        }
+
+        function agregarMacrosManual() {
+            const fecha = document.getElementById('fechaMacrosManual').value;
+            const nombre = 'Entrada manual';
+            const calorias = parseFloat(document.getElementById('caloriasManuales').value);
+            const proteinas = parseFloat(document.getElementById('proteinasManuales').value);
+            const grasas = parseFloat(document.getElementById('grasasManuales').value);
+            const hidratos = parseFloat(document.getElementById('hidratosManuales').value);
+
+            if (!fecha || isNaN(calorias) || isNaN(proteinas) || isNaN(grasas) || isNaN(hidratos)) {
+                alert('Por favor, completa todos los campos numéricos');
+                return;
+            }
+
+            const comida = {
+                fecha,
+                momento: '',
+                alimento: nombre,
+                cantidad: 0,
+                calorias: calorias,
+                grasas: grasas,
+                proteinas: proteinas,
+                hidratos: hidratos,
+                peso: 0,
+                timestamp: new Date().toISOString()
+            };
+
+            historico.push(comida);
+            guardarDatos();
+            
+            alert('✅ Macros añadidos correctamente');
+            
+            // Guardar la fecha actual antes de resetear el formulario
+            const fechaActual = document.getElementById('fechaMacrosManual').value;
+            
+            document.getElementById('formMacrosManual').reset();
+            document.getElementById('fechaMacrosManual').value = fechaActual;
+            
+            actualizarResumenDia();
+            mostrarComidasRecientes();
         }
 
         function agregarActividad() {
@@ -1343,11 +1486,55 @@
             mostrarComidasRecientes();
         }
 
+        function agregarComidasDiarias() {
+            const fecha = document.getElementById('fechaComida').value;
+            
+            if (!fecha) {
+                alert('Por favor, selecciona una fecha');
+                return;
+            }
+
+            const alimentosDiarios = alimentos.filter(a => a.cantidadDiaria && a.cantidadDiaria > 0);
+            
+            if (alimentosDiarios.length === 0) {
+                alert('⚠️ No hay alimentos con cantidad diaria configurada');
+                return;
+            }
+
+            let comidasAñadidas = 0;
+            alimentosDiarios.forEach(alimento => {
+                const cantidadGramos = alimento.cantidadDiaria;
+                const factor = cantidadGramos / alimento.peso;
+                
+                const comida = {
+                    fecha,
+                    momento: '',
+                    alimento: alimento.nombre,
+                    cantidad: cantidadGramos,
+                    calorias: alimento.calorias * factor,
+                    grasas: alimento.grasas * factor,
+                    proteinas: alimento.proteinas * factor,
+                    hidratos: alimento.hidratos * factor,
+                    peso: cantidadGramos,
+                    timestamp: new Date().toISOString()
+                };
+
+                historico.push(comida);
+                comidasAñadidas++;
+            });
+
+            guardarDatos();
+            alert(`✅ ${comidasAñadidas} comidas diarias añadidas correctamente`);
+            
+            actualizarResumenDia();
+            mostrarComidasRecientes();
+        }
+
+
         function agregarComidaDia() {
             const fecha = document.getElementById('fechaComida').value;
             const alimentoIndex = document.getElementById('alimentoSelect').value;
             const cantidadGramos = parseFloat(document.getElementById('cantidadComida').value);
-            const momento = document.getElementById('momentoDia').value;
 
             if (!fecha || alimentoIndex === '' || !cantidadGramos) {
                 alert('Por favor, completa todos los campos');
@@ -1359,7 +1546,7 @@
             
             const comida = {
                 fecha,
-                momento,
+                momento: '',
                 alimento: alimento.nombre,
                 cantidad: cantidadGramos,
                 calorias: alimento.calorias * factor,
@@ -1374,8 +1561,10 @@
             guardarDatos();
             
             alert('✅ Comida añadida correctamente');
+            
+            
             document.getElementById('formComidaDia').reset();
-            document.getElementById('fechaComida').valueAsDate = new Date();
+            document.getElementById('fechaComida').value = fecha;
             document.getElementById('cantidadComida').value = 100;
             
             actualizarResumenDia();
@@ -1443,12 +1632,11 @@
                             <div class="detalle-card ${esEjercicio ? 'ejercicio' : ''}">
                                 <div class="detalle-card-header">
                                     <div class="detalle-card-title">${comida.alimento}</div>
-                                    <div class="detalle-card-momento">${comida.momento}</div>
                                 </div>
                                 <div class="detalle-card-info">
                                     <div class="detalle-card-info-item">
                                         <span class="detalle-card-info-label">Cantidad:</span>
-                                        <span class="detalle-card-info-value">${esEjercicio ? Math.abs(comida.cantidad) + ' kcal' : comida.cantidad.toFixed(1) + 'g'}</span>
+                                        <span class="detalle-card-info-value">${esEjercicio ? Math.abs(comida.cantidad) + ' kcal' : (comida.cantidad > 0 ? comida.cantidad.toFixed(1) + 'g' : '-')}</span>
                                     </div>
                                     <div class="detalle-card-info-item">
                                         <span class="detalle-card-info-label">Calorías:</span>
@@ -1482,7 +1670,6 @@
                     <table class="summary-table">
                         <thead>
                             <tr>
-                                <th>Momento</th>
                                 <th>Alimento</th>
                                 <th>Cantidad</th>
                                 <th>Calorías</th>
@@ -1495,12 +1682,12 @@
                         <tbody>
                             ${comidasDelDia.map((comida, idx) => {
                                 const esEjercicio = comida.calorias < 0;
+                                const cantidadTexto = esEjercicio ? Math.abs(comida.cantidad) + ' kcal' : (comida.cantidad > 0 ? comida.cantidad.toFixed(1) + 'g' : '-');
                                 return `
                                 <tr style="${esEjercicio ? 'background: #fff5f5;' : ''}">
-                                    <td>${comida.momento}</td>
                                     <td style="${esEjercicio ? 'color: #ff6b6b; font-weight: bold;' : ''}">${comida.alimento}</td>
-                                    <td>${esEjercicio ? Math.abs(comida.cantidad) : comida.cantidad.toFixed(1)}${esEjercicio ? ' kcal' : 'g'}</td>
-                                    <td style="${esEjercicio ? 'color: #ff6b6b;' : ''}">${esEjercicio ? '' : Math.abs(comida.calorias).toFixed(0)} ${esEjercicio ? '-' + Math.abs(comida.calorias).toFixed(0) : ''} kcal</td>
+                                    <td>${cantidadTexto}</td>
+                                    <td style="${esEjercicio ? 'color: #ff6b6b;' : ''}">${esEjercicio ? '-' : ''}${Math.abs(comida.calorias).toFixed(0)} kcal</td>
                                     <td>${esEjercicio ? '-' : comida.proteinas.toFixed(1) + ' g'}</td>
                                     <td>${esEjercicio ? '-' : comida.grasas.toFixed(1) + ' g'}</td>
                                     <td>${esEjercicio ? '-' : comida.hidratos.toFixed(1) + ' g'}</td>
@@ -1540,12 +1727,13 @@
 
             div.innerHTML = recientes.map(comida => {
                 const esEjercicio = comida.calorias < 0;
+                const cantidadTexto = esEjercicio ? '(' + Math.abs(comida.cantidad) + ' kcal)' : (comida.cantidad > 0 ? '(' + comida.cantidad.toFixed(1) + 'g)' : '');
                 return `
                 <div class="comida-item" style="${esEjercicio ? 'background: #fff5f5; border-left: 4px solid #ff6b6b;' : ''}">
                     <div class="comida-info">
-                        <strong style="${esEjercicio ? 'color: #ff6b6b;' : ''}">${comida.alimento}</strong> ${esEjercicio ? '(' + Math.abs(comida.cantidad) + ' kcal)' : '(' + comida.cantidad.toFixed(1) + 'g)'}
+                        <strong style="${esEjercicio ? 'color: #ff6b6b;' : ''}">${comida.alimento}</strong> ${cantidadTexto}
                         <br>
-                        <small>${comida.fecha} - ${comida.momento}</small>
+                        <small>${comida.fecha}</small>
                         <br>
                         <small>${esEjercicio ? '-' : ''}${Math.abs(comida.calorias).toFixed(0)} kcal${esEjercicio ? '' : ' | P: ' + comida.proteinas.toFixed(1) + 'g | G: ' + comida.grasas.toFixed(1) + 'g | H: ' + comida.hidratos.toFixed(1) + 'g'}</small>
                     </div>
