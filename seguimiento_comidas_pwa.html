@@ -113,6 +113,10 @@
             border-bottom: 3px solid #667eea;
             overflow-x: auto;
             -webkit-overflow-scrolling: touch;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
         }
 
         .tab {
@@ -890,7 +894,7 @@
                     </div>
                 </div>
 
-                <div class="card card-collapsible collapsed">
+                <div class="card card-collapsible collapsed" id="cardMacrosManual">
                     <div class="card-header" onclick="toggleCard(this)">
                         <h3>Añadir Macros Manualmente</h3>
                         <span class="card-toggle-icon">▼</span>
@@ -900,6 +904,10 @@
                         <div class="form-group">
                             <label>Fecha</label>
                             <input type="date" id="fechaMacrosManual" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Nombre</label>
+                            <input type="text" id="nombreMacrosManual" value="Entrada manual" placeholder="Entrada manual">
                         </div>
                         <div class="form-group">
                             <label>Calorías (kcal)</label>
@@ -1413,7 +1421,8 @@
 
         function agregarMacrosManual() {
             const fecha = document.getElementById('fechaMacrosManual').value;
-            const nombre = 'Entrada manual';
+            const nombreInput = document.getElementById('nombreMacrosManual').value.trim();
+            const nombre = nombreInput || 'Entrada manual';
             const calorias = parseFloat(document.getElementById('caloriasManuales').value);
             const proteinas = parseFloat(document.getElementById('proteinasManuales').value);
             const grasas = parseFloat(document.getElementById('grasasManuales').value);
@@ -1658,6 +1667,7 @@
                                     ` : ''}
                                 </div>
                                 <div class="detalle-card-actions">
+                                    <button class="btn btn-primary small-btn" onclick="copiarComidaAMacros(${historico.indexOf(comida)})">📋 Copiar</button>
                                     <button class="btn btn-danger small-btn" onclick="eliminarComida('${fecha}', ${historico.indexOf(comida)})">🗑️ Eliminar</button>
                                 </div>
                             </div>
@@ -1739,6 +1749,33 @@
                     </div>
                 </div>
             `}).join('');
+        }
+
+        function copiarComidaAMacros(index) {
+            const comida = historico[index];
+            if (!comida) return;
+
+            const formatearNumero = (valor) => {
+                const numero = Number(valor);
+                return Number.isFinite(numero) ? numero.toFixed(1) : '0.0';
+            };
+
+            document.getElementById('nombreMacrosManual').value = comida.alimento || 'Entrada manual';
+            document.getElementById('caloriasManuales').value = formatearNumero(comida.calorias);
+            document.getElementById('proteinasManuales').value = formatearNumero(comida.proteinas);
+            document.getElementById('grasasManuales').value = formatearNumero(comida.grasas);
+            document.getElementById('hidratosManuales').value = formatearNumero(comida.hidratos);
+
+            const cardMacrosManual = document.getElementById('cardMacrosManual');
+            if (cardMacrosManual && cardMacrosManual.classList.contains('collapsed')) {
+                cardMacrosManual.classList.remove('collapsed');
+            }
+            if (cardMacrosManual) {
+                cardMacrosManual.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+
+            // No cambiamos la fecha actual del formulario manual.
+            alert('📋 Comida copiada al formulario de macros manuales');
         }
 
         // ===== ESTADÍSTICAS =====
